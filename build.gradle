@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation()
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.14.2'
 }
 
 tasks.withType(JavaCompile) {
