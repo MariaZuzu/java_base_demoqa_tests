@@ -11,10 +11,10 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.browserSize = "1920x1080";
-        Configuration.browser = "safari";
+        Configuration.browser = "chrome";
         Configuration.baseUrl = "https://demoqa.com";
 //        Configuration.pageLoadStrategy = "eager";
-        Configuration.timeout = "10000";  // default 4000
+        Configuration.timeout = 10000;  // default 4000
     }
 
     @AfterEach
