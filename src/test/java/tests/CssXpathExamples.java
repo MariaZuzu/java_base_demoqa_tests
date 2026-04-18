@@ -1,4 +1,4 @@
-package examples;
+package tests;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -48,4 +48,5 @@ public class CssXpathExamples {
         $(byText("Hello, qa.guru!"));
         $(withText("lo, qa"));
     }
+
 }
