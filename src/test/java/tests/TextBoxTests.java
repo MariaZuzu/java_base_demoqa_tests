@@ -22,9 +22,24 @@ public class TextBoxTests extends TestBase {
         $("[id=output] [id=email]").shouldHave(text("rose@pink.com"));
         $("[id=output] [id=currentAddress]").shouldHave(text("address 1"));
         $("[id=output] [id=permanentAddress]").shouldHave(text("address 2"));
-
-
     }
 
+    @Test
+    void MinimumFillFormTest() {
+
+        open("/text-box");
+        $("[id=userName]").setValue("Плюша");
+        $("[id=submit]").click();
+        $("[id=output] [id=name]").shouldHave(text("Плюша"));
+    }
+
+    @Test
+    void InvalidEmailFillFormTest() {
+
+        open("/text-box");
+        $("[id=userEmail]").setValue("rose");
+        $("[id=submit]").click();
+        $("[id=output]").shouldNotHave(text("rose"));
+    }
 
 }
