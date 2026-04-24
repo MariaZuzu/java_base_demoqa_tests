@@ -19,25 +19,21 @@ public class PracticeFormTests extends TestBase {
         $("[id=firstName]").setValue("Rose");
         $("[id=lastName]").setValue("White");
         $("[id=userEmail]").setValue("rose@white.com");
-        $("[id=gender-radio-2]").click();
+        $("#genterWrapper").$(byText("Female")).click();
         $("[id=userNumber]").setValue("1234567890");
 
-        // Кликнуть по полю Date of Birth, чтобы открыть календарь
+
         $("[id=dateOfBirthInput]").click();
-        // Выбрать месяц "June" (Июнь)
         $(".react-datepicker__month-select").selectOption("June");
-        // Выбрать год "2005»
         $(".react-datepicker__year-select").selectOption("2005");
-        // Выбрать день 15
         $(".react-datepicker__month").$(byText("15")).click();
 
 
         $("[id=subjectsInput]").setValue("Maths").pressEnter();
-        $("[id=hobbies-checkbox-2]").click();
+        $("#hobbiesWrapper").$(byText("Reading")).click();
 
 
-        File imageFile = new File("src/test/resources/test1.jpeg");
-        $("#uploadPicture").uploadFile(imageFile);
+        $("#uploadPicture").uploadFromClasspath("test1.jpeg");
         $("#uploadPicture").shouldHave(value("test1.jpeg"));
 
         $("[id=currentAddress]").setValue("г. Ярославль, ул. Чайковского, д. 3");
@@ -50,19 +46,20 @@ public class PracticeFormTests extends TestBase {
 
         $("[id=submit]").click();
 
+
+        $(".modal-content").shouldBe(com.codeborne.selenide.Condition.visible);
+
         // Проверка конкретных полей в таблице результатов
-        $(".modal-body table").shouldHave(
-                text("Rose White"),
-                text("rose@white.com"),
-                text("Female"),
-                text("1234567890"),
-                text("5 June,2005"),
-                text("Maths"),
-                text("Reading"),
-                text("test1.jpeg"),
-                text("г. Ярославль, ул. Чайковского, д. 3"),
-                text("Haryana Karnal")
-        );
+        $(".modal-body table").shouldHave(text("Rose White"));
+        $(".modal-body table").shouldHave(text("rose@white.com"));
+        $(".modal-body table").shouldHave(text("Female"));
+        $(".modal-body table").shouldHave(text("1234567890"));
+        $(".modal-body table").shouldHave(text("5 June,2005"));
+        $(".modal-body table").shouldHave(text("Maths"));
+        $(".modal-body table").shouldHave(text("Reading"));
+        $(".modal-body table").shouldHave(text("test1.jpeg"));
+        $(".modal-body table").shouldHave(text("г. Ярославль, ул. Чайковского, д. 3"));
+        $(".modal-body table").shouldHave(text("Haryana Karnal"));
 
         $("#closeLargeModal").click();
 
