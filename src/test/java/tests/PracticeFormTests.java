@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -12,15 +13,41 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class PracticeFormTests extends TestBase {
 
+      String firstName;
+      String lastName;
+      String userEmail;
+      String genterWrapper;
+      String userNumber;
+      String subjectsInput;
+      String hobbiesWrapper;
+      String currentAddress;
+      String state;
+      String city;
+
+
+    @BeforeEach
+    public void setup() {
+      firstName = "Rose";
+      lastName = "White";
+      userEmail = "rose@white.com";
+      genterWrapper = "Female";
+      userNumber = "1234567890";
+      subjectsInput = "Maths";
+      hobbiesWrapper = "Reading";
+      currentAddress = "г. Ярославль, ул. Чайковского, д. 3";
+      state = "Haryana";
+      city = "Karnal";
+    }
+
     @Test
     void successfulFillAllFormTest() {
 
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Rose");
-        $("[id=lastName]").setValue("White");
-        $("[id=userEmail]").setValue("rose@white.com");
-        $("#genterWrapper").$(byText("Female")).click();
-        $("[id=userNumber]").setValue("1234567890");
+        $("[id=firstName]").setValue(firstName);
+        $("[id=lastName]").setValue(lastName);
+        $("[id=userEmail]").setValue(userEmail);
+        $("#genterWrapper").$(byText(genterWrapper)).click();
+        $("[id=userNumber]").setValue(userNumber);
 
 
         $("[id=dateOfBirthInput]").click();
@@ -29,20 +56,20 @@ public class PracticeFormTests extends TestBase {
         $(".react-datepicker__month").$(byText("15")).click();
 
 
-        $("[id=subjectsInput]").setValue("Maths").pressEnter();
-        $("#hobbiesWrapper").$(byText("Reading")).click();
+        $("[id=subjectsInput]").setValue(subjectsInput).pressEnter();
+        $("#hobbiesWrapper").$(byText(hobbiesWrapper)).click();
 
 
         $("#uploadPicture").uploadFromClasspath("test1.jpeg");
         $("#uploadPicture").shouldHave(value("test1.jpeg"));
 
-        $("[id=currentAddress]").setValue("г. Ярославль, ул. Чайковского, д. 3");
+        $("[id=currentAddress]").setValue(currentAddress);
 
         $("[id=state]").click();
-        $(byText("Haryana")).click();
+        $(byText(state)).click();
 
         $("[id=city]").click();
-        $(byText("Karnal")).click();
+        $(byText(city)).click();
 
         $("[id=submit]").click();
 
@@ -75,10 +102,10 @@ public class PracticeFormTests extends TestBase {
         $("input[name='gender']").shouldHave(attribute("required"));
         $("[id=userNumber]").shouldHave(attribute("required"));
 
-        $("[id=firstName]").setValue("Rose");
-        $("[id=lastName]").setValue("White");
-        $("[id=gender-radio-2]").click();
-        $("[id=userNumber]").setValue("1234567890");
+        $("[id=firstName]").setValue(firstName);
+        $("[id=lastName]").setValue(lastName);
+        $("#genterWrapper").$(byText(genterWrapper)).click();
+        $("[id=userNumber]").setValue(userNumber);
 
         $("[id=submit]").click();
 
@@ -113,10 +140,10 @@ public class PracticeFormTests extends TestBase {
     void InvalidUserNumber() {
 
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Rose");
-        $("[id=lastName]").setValue("White");
-        $("[id=gender-radio-2]").click();
-        $("[id=userNumber]").setValue("123");
+        $("[id=firstName]").setValue(firstName);
+        $("[id=lastName]").setValue(lastName);
+        $("#genterWrapper").$(byText(genterWrapper)).click();
+        $("[id=userNumber]").setValue(userNumber);
 
         $("[id=submit]").click();
 
@@ -128,11 +155,11 @@ public class PracticeFormTests extends TestBase {
     void InvalidUserEmail() {
 
         open("/automation-practice-form");
-        $("[id=firstName]").setValue("Rose");
-        $("[id=lastName]").setValue("White");
-        $("[id=userEmail]").setValue("rosewhite.com");
-        $("[id=gender-radio-2]").click();
-        $("[id=userNumber]").setValue("1234567890");
+        $("[id=firstName]").setValue(firstName);
+        $("[id=lastName]").setValue(lastName);
+        $("[id=userEmail]").setValue(userEmail);
+        $("#genterWrapper").$(byText(genterWrapper)).click();
+        $("[id=userNumber]").setValue(userNumber);
 
         $("[id=submit]").click();
 

@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -8,14 +9,27 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class TextBoxTests extends TestBase {
 
+    String userName;
+    String userEmail;
+    String currentAddress;
+    String permanentAddress;
+
+    @BeforeEach
+    public void setup() {
+        userName = "Rose Pink";
+        userEmail = "rose@pink.com";
+        currentAddress = "address 1";
+        permanentAddress = "address 2";
+    }
+
     @Test
     void successfulFillFormTest() {
 
         open("/text-box");
-        $("[id=userName]").setValue("Rose Pink");
-        $("[id=userEmail]").setValue("rose@pink.com");
-        $("[id=currentAddress]").setValue("address 1");
-        $("[id=permanentAddress]").setValue("address 2");
+        $("[id=userName]").setValue(userName);
+        $("[id=userEmail]").setValue(userEmail);
+        $("[id=currentAddress]").setValue(currentAddress);
+        $("[id=permanentAddress]").setValue(permanentAddress);
         $("[id=submit]").click();
 
         $("[id=output] [id=name]").shouldHave(text("Rose Pink"));
