@@ -1,43 +1,16 @@
 package tests;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
-import java.io.File;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static tests.testdata.TestData.*;
+
 
 public class PracticeFormTests extends TestBase {
-
-      String firstName;
-      String lastName;
-      String userEmail;
-      String genterWrapper;
-      String userNumber;
-      String subjectsInput;
-      String hobbiesWrapper;
-      String currentAddress;
-      String state;
-      String city;
-
-
-    @BeforeEach
-    public void setup() {
-      firstName = "Rose";
-      lastName = "White";
-      userEmail = "rose@white.com";
-      genterWrapper = "Female";
-      userNumber = "1234567890";
-      subjectsInput = "Maths";
-      hobbiesWrapper = "Reading";
-      currentAddress = "г. Ярославль, ул. Чайковского, д. 3";
-      state = "Haryana";
-      city = "Karnal";
-    }
 
     @Test
     void successfulFillAllFormTest() {
@@ -46,22 +19,22 @@ public class PracticeFormTests extends TestBase {
         $("[id=firstName]").setValue(firstName);
         $("[id=lastName]").setValue(lastName);
         $("[id=userEmail]").setValue(userEmail);
-        $("#genterWrapper").$(byText(genterWrapper)).click();
+        $("#genterWrapper").$(byText(genderWrapper)).click();
         $("[id=userNumber]").setValue(userNumber);
 
 
         $("[id=dateOfBirthInput]").click();
-        $(".react-datepicker__month-select").selectOption("June");
-        $(".react-datepicker__year-select").selectOption("2005");
-        $(".react-datepicker__month").$(byText("15")).click();
+        $(".react-datepicker__month-select").selectOption(month);
+        $(".react-datepicker__year-select").selectOption(year);
+        $(".react-datepicker__month").$(byText(day)).click();
 
 
         $("[id=subjectsInput]").setValue(subjectsInput).pressEnter();
         $("#hobbiesWrapper").$(byText(hobbiesWrapper)).click();
 
 
-        $("#uploadPicture").uploadFromClasspath("test1.jpeg");
-        $("#uploadPicture").shouldHave(value("test1.jpeg"));
+        $("#uploadPicture").uploadFromClasspath(uploadPicture);
+        $("#uploadPicture").shouldHave(value(uploadPicture));
 
         $("[id=currentAddress]").setValue(currentAddress);
 
@@ -77,16 +50,16 @@ public class PracticeFormTests extends TestBase {
         $(".modal-content").shouldBe(com.codeborne.selenide.Condition.visible);
 
         // Проверка конкретных полей в таблице результатов
-        $(".modal-body table").shouldHave(text("Rose White"));
-        $(".modal-body table").shouldHave(text("rose@white.com"));
-        $(".modal-body table").shouldHave(text("Female"));
-        $(".modal-body table").shouldHave(text("1234567890"));
-        $(".modal-body table").shouldHave(text("5 June,2005"));
-        $(".modal-body table").shouldHave(text("Maths"));
-        $(".modal-body table").shouldHave(text("Reading"));
-        $(".modal-body table").shouldHave(text("test1.jpeg"));
-        $(".modal-body table").shouldHave(text("г. Ярославль, ул. Чайковского, д. 3"));
-        $(".modal-body table").shouldHave(text("Haryana Karnal"));
+        $(".modal-body table").shouldHave(text(userName));
+        $(".modal-body table").shouldHave(text(userEmail));
+        $(".modal-body table").shouldHave(text(genderWrapper));
+        $(".modal-body table").shouldHave(text(userNumber));
+        $(".modal-body table").shouldHave(text(userBirthDay));
+        $(".modal-body table").shouldHave(text(subjectsInput));
+        $(".modal-body table").shouldHave(text(hobbiesWrapper));
+        $(".modal-body table").shouldHave(text(uploadPicture));
+        $(".modal-body table").shouldHave(text(currentAddress));
+        $(".modal-body table").shouldHave(text(stateAndCity));
 
         $("#closeLargeModal").click();
 
@@ -104,15 +77,15 @@ public class PracticeFormTests extends TestBase {
 
         $("[id=firstName]").setValue(firstName);
         $("[id=lastName]").setValue(lastName);
-        $("#genterWrapper").$(byText(genterWrapper)).click();
+        $("#genterWrapper").$(byText(genderWrapper)).click();
         $("[id=userNumber]").setValue(userNumber);
 
         $("[id=submit]").click();
 
         $(".modal-body table").shouldHave(
-                text("Rose White"),
-                text("Female"),
-                text("1234567890")
+                text(userName),
+                text(genderWrapper),
+                text(userNumber)
         );
 
         $("#closeLargeModal").click();
@@ -142,7 +115,7 @@ public class PracticeFormTests extends TestBase {
         open("/automation-practice-form");
         $("[id=firstName]").setValue(firstName);
         $("[id=lastName]").setValue(lastName);
-        $("#genterWrapper").$(byText(genterWrapper)).click();
+        $("#genterWrapper").$(byText(genderWrapper)).click();
         $("[id=userNumber]").setValue(userNumber);
 
         $("[id=submit]").click();
@@ -158,7 +131,7 @@ public class PracticeFormTests extends TestBase {
         $("[id=firstName]").setValue(firstName);
         $("[id=lastName]").setValue(lastName);
         $("[id=userEmail]").setValue(userEmail);
-        $("#genterWrapper").$(byText(genterWrapper)).click();
+        $("#genterWrapper").$(byText(genderWrapper)).click();
         $("[id=userNumber]").setValue(userNumber);
 
         $("[id=submit]").click();
