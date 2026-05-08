@@ -19,4 +19,5 @@ public class TestData {
         public static String state = "Haryana";
         public static String city = "Karnal";
         public static String stateAndCity = "Haryana Karnal";
+        public static String messageAfterSubmitting = "Thanks for submitting the form";
 }
