@@ -9,7 +9,7 @@ public class TestData {
         public static String userNumber = "1234567890";
         public static String month = "June";
         public static String year = "2005";
-        public static String day = "5";
+        public static String day = "15";
         public static String userBirthDay = "5 June,2005";
         public static String subjectsInput = "Maths";
         public static String hobbiesWrapper = "Reading";
