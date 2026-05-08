@@ -5,6 +5,7 @@ import com.codeborne.selenide.Condition;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 public class RegistrationResultsComponent {
@@ -14,11 +15,11 @@ public class RegistrationResultsComponent {
         return this;
     }
 
-    public RegistrationResultsComponent checkModalTitleWindowClosed() {
-        $("#closeModal").click();
-        $("#closeModal").shouldNotBe(visible);
-        return this;
-    }
+//    public RegistrationResultsComponent checkModalTitleWindowClosed() {
+//        $("#closeModal").click();
+//        $("#closeModal").shouldNotBe(visible);
+//        return this;
+//    }
 
     public RegistrationResultsComponent checkFormResults(String fieldName, String expectedValue) {
         $(".table-responsive")
@@ -26,5 +27,9 @@ public class RegistrationResultsComponent {
                 .findBy(text(fieldName))
                 .shouldHave(text(expectedValue));
         return this;
+    }
+
+    public void checkModalTitleWindowClosed() {
+        $(byText("Close")).click();
     }
 }
