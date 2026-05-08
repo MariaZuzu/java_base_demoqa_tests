@@ -58,7 +58,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setDateOfBirth(String day, String month, String year) {
-        $("#=dateOfBirthInput").click();
+        $("#dateOfBirthInput").click();
         calendar.setDate(day, month, year);
 
         return this;
