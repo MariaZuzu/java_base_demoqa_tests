@@ -40,22 +40,6 @@ public class RegistrationTests extends TestBase {
                 .checkFormResults("State and City", state + " " + city)
                 .checkModalTitleWindowClosed();
 
-        $(".modal-content").shouldBe(com.codeborne.selenide.Condition.visible);
-
-        // Проверка конкретных полей в таблице результатов
-        $(".modal-body table").shouldHave(text(userName));
-        $(".modal-body table").shouldHave(text(userEmail));
-        $(".modal-body table").shouldHave(text(genderWrapper));
-        $(".modal-body table").shouldHave(text(userNumber));
-        $(".modal-body table").shouldHave(text(userBirthDay));
-        $(".modal-body table").shouldHave(text(subjectsInput));
-        $(".modal-body table").shouldHave(text(hobbiesWrapper));
-        $(".modal-body table").shouldHave(text(uploadPicture));
-        $(".modal-body table").shouldHave(text(currentAddress));
-        $(".modal-body table").shouldHave(text(stateAndCity));
-
-        $("#closeLargeModal").click();
-
     }
 
     @Test

@@ -3,29 +3,25 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static tests.testdata.TestData.genderWrapper;
-import static tests.testdata.TestData.subjectsInput;
 
 public class RegistrationPage {
     CalendarComponent calendar = new CalendarComponent();
-    private SelenideElement firstNameInput = $("#firstName");
-    private SelenideElement lastNameInput = $("#lastName");
-    private SelenideElement userEmailInput = $("#userEmail");
-    private SelenideElement genderContainer = $("#genterWrapper");
-    private SelenideElement userNumberInput = $("#userNumber");
-    private SelenideElement subjectsInput = $("#subjectsInput");
-    private SelenideElement hobbiesContainer = $("#hobbiesWrapper");
-    private SelenideElement uploadPicture = $("#uploadPicture");
-    private SelenideElement currentAddressInput = $("#currentAddress");
-    private SelenideElement stateSelect = $("#state");
-    private SelenideElement citySelect = $("#city");
-    private SelenideElement stateCityContainer = $("#stateCity-wrapper");
-    private SelenideElement submitButton = $("#submit");
+    private final SelenideElement firstNameInput = $("#firstName");
+    private final SelenideElement lastNameInput = $("#lastName");
+    private final SelenideElement userEmailInput = $("#userEmail");
+    private final SelenideElement genderContainer = $("#genterWrapper");
+    private final SelenideElement userNumberInput = $("#userNumber");
+    private final SelenideElement subjectsInput = $("#subjectsInput");
+    private final SelenideElement hobbiesContainer = $("#hobbiesWrapper");
+    private final SelenideElement uploadPicture = $("#uploadPicture");
+    private final SelenideElement currentAddressInput = $("#currentAddress");
+    private final SelenideElement stateSelect = $("#state");
+    private final SelenideElement citySelect = $("#city");
+    private final SelenideElement stateCityContainer = $("#stateCity-wrapper");
+    private final SelenideElement submitButton = $("#submit");
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
@@ -119,10 +115,4 @@ public class RegistrationPage {
 
         return this;
     }
-
-//  public RegistrationPage checkField(String key, String value) {
-//        outputResults.$(byId(key)).shouldHave(text(value));
-//
-//        return this;
-//    }
 }
