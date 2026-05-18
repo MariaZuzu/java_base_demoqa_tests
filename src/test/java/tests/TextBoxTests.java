@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static tests.testdata.TestData.*;
+import static utils.RandomUtils.getRandomString;
 
 public class TextBoxTests extends TestBase {
 
@@ -35,6 +36,26 @@ public class TextBoxTests extends TestBase {
         String userEmail = faker.internet().emailAddress();
         String currentAddress = fakerRu.address().fullAddress();
         String permanentAddress = fakerRu.address().fullAddress();
+
+        textBoxPage.openPage();
+        textBoxPage.typeUserName(userName);
+        textBoxPage.typeUserEmail(userEmail);
+        textBoxPage.typeCurrentAddress(currentAddress);
+        textBoxPage.typePermanentAddress(permanentAddress);
+        textBoxPage.submitForm();
+
+        textBoxPage.checkField("name", userName);
+        textBoxPage.checkField("email", userEmail);
+        textBoxPage.checkField("currentAddress", currentAddress);
+        textBoxPage.checkField("permanentAddress", permanentAddress);
+    }
+
+    @Test
+    void successfulFillFormTest_with_utils() {
+        String userName = getRandomString(10);
+        String userEmail = "rose@white.com";
+        String currentAddress = "г. Ярославль, ул. Чайковского, д. 3";
+        String permanentAddress = "address 2";
 
         textBoxPage.openPage();
         textBoxPage.typeUserName(userName);
