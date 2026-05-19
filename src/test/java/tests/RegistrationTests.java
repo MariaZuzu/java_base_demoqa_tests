@@ -1,6 +1,8 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
+import tests.testdata.TestData;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -39,6 +41,53 @@ public class RegistrationTests extends TestBase {
                 .checkFormResults("Address", currentAddress)
                 .checkFormResults("State and City", state + " " + city)
                 .checkModalTitleWindowClosed();
+
+    }
+
+    @Test
+    void successfulFillAllFormTest_with_faker() {
+        Faker faker = new Faker();
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String userEmail = faker.internet().emailAddress();
+        String userNumber = faker.phoneNumber().subscriberNumber(10);
+        String genderWrapper = faker.options().option("Male", "Female", "Other");
+        String day = String.valueOf(faker.number().numberBetween(1, 30));
+        String month = faker.options().option("May", "June", "July", "August");
+        String year = String.valueOf(faker.number().numberBetween(1990, 2005));
+        String subjectsInput = faker.options().option("Chemistry", "Math", "History", "English");
+        String hobbiesWrapper = faker.options().option("Music", "Sports", "Reading");
+        String uploadPicture = faker.options().option("test1.jpeg");
+        String currentAddress = faker.address().fullAddress();
+
+
+        registrationPage.openPage()
+                .typeFirstName(firstName)
+                .typeLastName(lastName)
+                .typeUserEmail(userEmail)
+                .typeUserNumber(userNumber)
+                .setGender(genderWrapper)
+                .setDateOfBirth(day, month, year)
+                .typeSubjectsInput(subjectsInput)
+                .setHobbies(hobbiesWrapper)
+                .uploadPicture(uploadPicture)
+                .typeCurrentAddress(currentAddress)
+                .setStateAndCity(state, city)
+                .submitForm();
+
+        registrationResultsComponent.checkModalTitleWindowOpen(messageAfterSubmitting)
+            .checkFormResults("Student Name",lastName)
+            .checkFormResults("Student Email",userEmail)
+            .checkFormResults("Gender",genderWrapper)
+            .checkFormResults("Mobile",userNumber)
+            .checkFormResults("Date of Birth",userBirthDay)
+            .checkFormResults("Subjects",subjectsInput)
+            .checkFormResults("Hobbies",hobbiesWrapper)
+            .checkFormResults("Picture",uploadPicture)
+            .checkFormResults("Address",currentAddress)
+            .checkFormResults("State and City",state +" "+city)
+            .checkModalTitleWindowClosed();
+        }
 
     }
 
@@ -92,7 +141,5 @@ public class RegistrationTests extends TestBase {
         $(".modal-body table").shouldHave(text(stateAndCity));
 
         $("#closeLargeModal").click();
-
-    }
 
     }

@@ -7,7 +7,6 @@ import java.util.Locale;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static tests.testdata.TestData.*;
 
 public class TextBoxTests extends TestBase {
