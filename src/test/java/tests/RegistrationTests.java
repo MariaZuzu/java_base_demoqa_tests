@@ -1,10 +1,7 @@
 package tests;
 
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import tests.testdata.TestData;
-
-import static tests.testdata.TestData.*;
 
 public class RegistrationTests extends TestBase {
     TestData data = new TestData();

@@ -30,6 +30,5 @@ public class TestData {
             default -> null;
         };
     }
-//    public String stateAndCity = "Haryana Karnal";
     public String messageAfterSubmitting = "Thanks for submitting the form";
 }
