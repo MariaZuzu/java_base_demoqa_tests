@@ -2,6 +2,7 @@ package pages.components;
 
 
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -14,6 +15,7 @@ public class RegistrationResultsComponent {
         return this;
     }
 
+    @Step("Проверить что поле \"{fieldName}\" имеет значение \"{expectedValue}\"")
     public RegistrationResultsComponent checkFormResults(String fieldName, String expectedValue) {
         $(".table-responsive")
                 .$$( "tr")

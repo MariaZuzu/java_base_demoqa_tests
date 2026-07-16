@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Selectors.byText;
@@ -23,36 +24,42 @@ public class RegistrationPage {
     private final SelenideElement stateCityContainer = $("#stateCity-wrapper");
     private final SelenideElement submitButton = $("#submit");
 
+    @Step("Открыть страницу регистрации /automation-practice-form")
     public RegistrationPage openPage() {
         open("/automation-practice-form");
 
         return this;
     }
 
+    @Step("Ввести имя \"{value}\"")
     public RegistrationPage typeFirstName(String value) {
         firstNameInput.setValue(value);
 
         return this;
     }
 
+    @Step("Ввести фамилию \"{value}\"")
     public RegistrationPage typeLastName(String value) {
         lastNameInput.setValue(value);
 
         return this;
     }
 
+    @Step("Ввести эл.почту \"{value}\"")
     public RegistrationPage typeUserEmail(String value) {
         userEmailInput.setValue(value);
 
         return this;
     }
 
+    @Step("Выбрать пол \"{value}\"")
     public RegistrationPage setGender(String value) {
         genderContainer.$(byText(value)).click();
 
         return this;
     }
 
+    @Step("Выбрать дату рождения \"{day}\", \"{month}\", \"{year}\"")
     public RegistrationPage setDateOfBirth(String day, String month, String year) {
         $("#dateOfBirthInput").click();
         calendar.setDate(day, month, year);
@@ -60,35 +67,42 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Выбрать предмет \"{value}\"")
     public RegistrationPage typeSubjectsInput(String value) {
         subjectsInput.setValue(value).pressEnter();
 
         return this;
     }
 
+    @Step("Ввести номер телефона \"{value}\"")
     public RegistrationPage typeUserNumber(String value) {
         userNumberInput.setValue(value);
 
         return this;
     }
 
+    @Step("Выбрать хобби \"{value}\"")
     public RegistrationPage setHobbies(String value) {
         hobbiesContainer.$(byText(value)).click();
 
         return this;
     }
 
+    @Step("Загрузить файл \"{value}\"")
     public RegistrationPage uploadPicture(String value){
         uploadPicture.uploadFromClasspath(value);
 
         return this;
     }
 
+    @Step("Ввести адрес \"{value}\"")
     public RegistrationPage typeCurrentAddress(String value) {
         currentAddressInput.setValue(value);
 
         return this;
     }
+
+    @Step("Выбрать штат \"{value}\"")
     public RegistrationPage setState(String value) {
         stateSelect.click();
         stateCityContainer.$(byText(value)).click();
@@ -96,6 +110,7 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Выбрать город \"{value}\"")
     public RegistrationPage setCity(String value) {
         citySelect.click();
         stateCityContainer.$(byText(value)).click();

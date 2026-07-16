@@ -1,19 +1,29 @@
 package tests;
 
+import io.qameta.allure.Story;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static io.qameta.allure.Allure.step;
 import static tests.testdata.TestData.*;
 
-
-public class RegistrationTests extends TestBase {
+@Story("Registration form")
+public class RegistrationWithPageObjectTests extends TestBase {
 
     @Test
+    @DisplayName("Successful Fill All Form")
     void successfulFillAllFormTest() {
-        registrationPage.openPage()
+
+        step("Открытие страницы регистрации", () ->
+            registrationPage.openPage());
+
+        step("Заполнение формы регистрации", () -> {
+            registrationPage.openPage()
                 .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .typeUserEmail(userEmail)
@@ -26,8 +36,10 @@ public class RegistrationTests extends TestBase {
                 .typeCurrentAddress(currentAddress)
                 .setStateAndCity(state, city)
                 .submitForm();
+        });
 
-        registrationResultsComponent.checkModalTitleWindowOpen(messageAfterSubmitting)
+        step("Проверка результатов заполнения формы регистрации", () -> {
+            registrationResultsComponent.checkModalTitleWindowOpen(messageAfterSubmitting)
                 .checkFormResults("Student Name", userName)
                 .checkFormResults("Student Email", userEmail)
                 .checkFormResults("Gender", genderWrapper)
@@ -39,7 +51,7 @@ public class RegistrationTests extends TestBase {
                 .checkFormResults("Address", currentAddress)
                 .checkFormResults("State and City", state + " " + city)
                 .checkModalTitleWindowClosed();
-
+        });
     }
 
     @Test
