@@ -4,11 +4,8 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.value;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static tests.testdata.TestData.*;
 import static io.qameta.allure.Allure.step;
 
@@ -23,8 +20,7 @@ public class RegistrationWithPageObjectTests extends TestBase {
             registrationPage.openPage());
 
         step("Заполнение формы регистрации", () -> {
-            registrationPage.openPage()
-                .typeFirstName(firstName)
+            registrationPage.typeFirstName(firstName)
                 .typeLastName(lastName)
                 .typeUserEmail(userEmail)
                 .typeUserNumber(userNumber)
@@ -62,8 +58,7 @@ public class RegistrationWithPageObjectTests extends TestBase {
                 registrationPage.openPage());
 
         step("Заполнение формы регистрации", () -> {
-            registrationPage.openPage()
-                    .typeFirstName(firstName)
+            registrationPage.typeFirstName(firstName)
                     .typeLastName(lastName)
                     .typeUserEmail(userEmail)
                     .typeUserNumber(userNumber)
@@ -91,6 +86,86 @@ public class RegistrationWithPageObjectTests extends TestBase {
                     .checkFormResults("State and City", state + " " + city)
                     .checkModalTitleWindowClosed();
         });
+    }
+
+    @Test
+    @DisplayName("Fill Required Fields Form")
+    void fillRequiredFieldsFormTest() {
+
+        step("Открытие страницы регистрации", () ->
+                registrationPage.openPage());
+
+        step("Заполнение обязательных полей формы", () -> {
+            registrationPage.typeFirstName(firstName)
+                    .typeLastName(lastName)
+                    .setGender(genderWrapper)
+                    .typeUserNumber(userNumber);
+        });
+
+        step("Отправка формы", () ->
+                registrationPage.submitForm());
+
+        step("Проверка результатов", () -> {
+            registrationResultsComponent
+                    .checkModalTitleWindowOpen(messageAfterSubmitting)
+                    .checkFormResults("Student Name", userName)
+                    .checkFormResults("Gender", genderWrapper)
+                    .checkFormResults("Mobile", userNumber);
+        });
+    }
+
+    @Test
+    @DisplayName("Empty Fields Form")
+    void emptyFieldsFormTest() {
+
+        step("Открытие страницы регистрации", () ->
+                registrationPage.openPage());
+
+        step("Отправка формы", () ->
+                registrationPage.submitForm());
+
+        step("Проверка результатов", () ->
+                $(".modal-content").shouldNotBe(visible));
+    }
+
+    @Test
+    @DisplayName("Invalid User Number")
+    void InvalidUserNumber() {
+
+        step("Открытие страницы регистрации", () ->
+                registrationPage.openPage());
+
+        step("Заполнение формы регистрации", () -> {
+            registrationPage.typeFirstName(firstName)
+                    .typeLastName(lastName)
+                    .typeUserNumber(invalidUserNumber)
+                    .setGender(genderWrapper)
+                    .submitForm();
+        });
+
+        step("Проверка результатов", () ->
+                $(".modal-content").shouldNotBe(visible));
+    }
+
+    /* Проверка отправки формы с невалидным email */
+    @Test
+    @DisplayName("Invalid User Email")
+    void InvalidUserEmail() {
+
+        step("Открытие страницы регистрации", () ->
+                registrationPage.openPage());
+
+        step("Заполнение формы регистрации", () -> {
+            registrationPage.typeFirstName(firstName)
+                    .typeLastName(lastName)
+                    .typeUserEmail(invalidUserEmail)
+                    .typeUserNumber(userNumber)
+                    .setGender(genderWrapper)
+                    .submitForm();
+        });
+
+        step("Проверка результатов", () ->
+                $(".modal-content").shouldNotBe(visible));
     }
 
 }

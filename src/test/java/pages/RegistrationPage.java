@@ -125,9 +125,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage submitForm () {
-        submitButton.click();
-
-        return this;
+    public RegistrationPage submitForm() {
+        return null;
     }
 }
