@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class RegistrationResultsComponent {
 
     public RegistrationResultsComponent checkModalTitleWindowOpen(String value) {
-        $("#example-modal-sizes-title-lg").shouldHave(Condition.exactText(value));
+        $(".modal-content").shouldHave(Condition.exactText(value));
         return this;
     }
 

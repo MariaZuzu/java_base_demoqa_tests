@@ -28,7 +28,7 @@ public class TestBase {
     static void beforeAll() {
         Configuration.browserSize = System.getProperty("browserResolution", "1920x1080");
         Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("browserVersion","148.0");
+        Configuration.browserVersion = System.getProperty("browserVersion","149.0");
         Configuration.baseUrl = System.getProperty("testSiteBaseUrl", "https://demoqa.com");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
