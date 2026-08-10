@@ -147,7 +147,6 @@ public class RegistrationWithPageObjectTests extends TestBase {
                 $(".modal-content").shouldNotBe(visible));
     }
 
-    /* Проверка отправки формы с невалидным email */
     @Test
     @DisplayName("Invalid User Email")
     void InvalidUserEmail() {
