@@ -51,41 +51,21 @@ public class RegistrationWithPageObjectTests extends TestBase {
     }
 
     @Test
-    @DisplayName("Successful Fill All Form Broken")
-    void successfulFillAllFormTest_broken() {
+    @DisplayName("Negative Email Test")
+    void negativeEmailTest() {
 
         step("Открытие страницы регистрации", () ->
-                registrationPage.openPage());
+            registrationPage.openPage());
 
-        step("Заполнение формы регистрации", () -> {
+        step("Частичное заполнение полей формы", () -> {
             registrationPage.typeFirstName(firstName)
-                    .typeLastName(lastName)
-                    .typeUserEmail(userEmail)
-                    .typeUserNumber(userNumber)
-                    .setGender(genderWrapper)
-                    .setDateOfBirth(day, month, year)
-                    .typeSubjectsInput(subjectsInput)
-                    .setHobbies(hobbiesWrapper)
-                    .uploadPicture(uploadPicture)
-                    .typeCurrentAddress(currentAddress)
-                    .setStateAndCity(state, city)
-                    .submitForm();
+                .typeLastName(lastName)
+                .typeUserEmail(invalidUserEmail)
+                .submitForm();
         });
 
-        step("Проверка результатов заполнения формы регистрации", () -> {
-            registrationResultsComponent.checkModalTitleWindowOpen(messageAfterSubmitting)
-                    .checkFormResults("Student Name", userEmail)
-                    .checkFormResults("Student Email", userEmail)
-                    .checkFormResults("Gender", genderWrapper)
-                    .checkFormResults("Mobile", userNumber)
-                    .checkFormResults("Date of Birth", userBirthDay)
-                    .checkFormResults("Subjects", subjectsInput)
-                    .checkFormResults("Hobbies", hobbiesWrapper)
-                    .checkFormResults("Picture", uploadPicture)
-                    .checkFormResults("Address", currentAddress)
-                    .checkFormResults("State and City", state + " " + city)
-                    .checkModalTitleWindowClosed();
-        });
+        step("Проверка подсветки красным цветом поля почты", () ->
+            registrationPage.checkBorderColorUserEmail());
     }
 
     @Test
@@ -99,11 +79,9 @@ public class RegistrationWithPageObjectTests extends TestBase {
             registrationPage.typeFirstName(firstName)
                     .typeLastName(lastName)
                     .setGender(genderWrapper)
-                    .typeUserNumber(userNumber);
+                    .typeUserNumber(userNumber)
+                    .submitForm();
         });
-
-        step("Отправка формы", () ->
-                registrationPage.submitForm());
 
         step("Проверка результатов", () -> {
             registrationResultsComponent
@@ -118,11 +96,10 @@ public class RegistrationWithPageObjectTests extends TestBase {
     @DisplayName("Empty Fields Form")
     void emptyFieldsFormTest() {
 
-        step("Открытие страницы регистрации", () ->
-                registrationPage.openPage());
-
-        step("Отправка формы", () ->
-                registrationPage.submitForm());
+        step("Открытие страницы регистрации", () -> {
+                registrationPage.openPage()
+                .submitForm();
+        });
 
         step("Проверка результатов", () ->
                 $(".modal-content").shouldNotBe(visible));

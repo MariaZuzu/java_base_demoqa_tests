@@ -4,9 +4,11 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import pages.components.CalendarComponent;
 
+import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static tests.testdata.TestData.borderColorRed;
 
 public class RegistrationPage {
     CalendarComponent calendar = new CalendarComponent();
@@ -24,7 +26,7 @@ public class RegistrationPage {
     private final SelenideElement stateCityContainer = $("#stateCity-wrapper");
     private final SelenideElement submitButton = $("#submit");
 
-//    @Step("Открыть страницу регистрации /automation-practice-form")
+
     public RegistrationPage openPage() {
         open("/automation-practice-form");
 
@@ -125,10 +127,15 @@ public class RegistrationPage {
         return this;
     }
 
-    @Step("Нажать кнопку Submit")
+    @Step("Нажатие на кнопку отправки формы Submit")
     public RegistrationPage submitForm () {
         submitButton.click();
 
+        return this;
+    }
+
+    public RegistrationPage checkBorderColorUserEmail() {
+        userEmailInput.shouldHave(cssValue("border-color", borderColorRed));
         return this;
     }
 }
