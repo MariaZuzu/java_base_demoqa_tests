@@ -51,6 +51,8 @@ clean test -Dbrowser=$BROWSER -DtestSiteBaseUrl=$BASE_URL -DbrowserResolution=$B
 
 Для запуска сборки необходимо перейти в раздел <code>Собрать с параметрами</code> и нажать кнопку <code>Собрать</code>.
 <p align="center">
+
+[Ссылка на сборку Jenkins](https://jenkins.qa.guru/view/java-students/job/zuuma2317_ui_tests_allure_testops/)
 <img title="Jenkins Build" src="media/screens/jenkins.png">
 </p>
 После выполнения сборки, в блоке <code>История сборок</code> напротив номера сборки появятся значки <code>Allure Report</code> и <code>Allure TestOps</code>, при клике на которые откроется страница с сформированным html-отчетом и тестовой документацией соответственно.
@@ -58,6 +60,7 @@ clean test -Dbrowser=$BROWSER -DtestSiteBaseUrl=$BASE_URL -DbrowserResolution=$B
 ## <img width="4%" style="vertical-align:middle" title="Allure Report" src="media/logo/Allure_Report.svg"> Пример Allure-отчета
 ### Overview
 
+[Ссылка на Allure Report](https://jenkins.qa.guru/view/java-students/job/zuuma2317_ui_tests_allure_testops/9/allure/)
 <p align="center">
 <img title="Allure Overview" src="media/screens/allure.png">
 </p>
@@ -66,12 +69,14 @@ clean test -Dbrowser=$BROWSER -DtestSiteBaseUrl=$BASE_URL -DbrowserResolution=$B
 
 На *Dashboard* в <code>Allure TestOps</code> видна статистика количества тестов: сколько из них добавлены и проходятся вручную, сколько автоматизированы. Новые тесты, а так же результаты прогона приходят по интеграции при каждом запуске сборки.
 
+[Ссылка на Allure TestOps](https://allure.qa.guru/project/5325/dashboards)
 <p align="center">
 <img title="Allure TestOps DashBoard" src="media/screens/AllureTestOps.png">
 </p>
 
 ### Результат выполнения автотеста
 
+[Ссылка на автотесты в TestOps](https://allure.qa.guru/launch/55414/tree/947219?treeId=0)
 <p align="center">
 <img title="Test Results in Alure TestOps" src="media/screens/allurResults.png">
 </p>
@@ -80,6 +85,7 @@ clean test -Dbrowser=$BROWSER -DtestSiteBaseUrl=$BASE_URL -DbrowserResolution=$B
 
 Реализована интеграция <code>Allure TestOps</code> с <code>Jira</code>, в тикете отображается, какие тест-кейсы были написаны в рамках задачи и результат их прогона.
 
+[Ссылка на тикет в Jira](https://jira.qa.guru/browse/REF-18)
 <p align="center">
 <img title="Jira Task" src="media/screens/Jira.png">
 </p>
