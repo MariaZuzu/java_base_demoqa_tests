@@ -26,7 +26,7 @@ public class RegistrationPage {
     private final SelenideElement stateCityContainer = $("#stateCity-wrapper");
     private final SelenideElement submitButton = $("#submit");
 
-
+    @Step("Открыть страницу регистрации /automation-practice-form")
     public RegistrationPage openPage() {
         open("/automation-practice-form");
 

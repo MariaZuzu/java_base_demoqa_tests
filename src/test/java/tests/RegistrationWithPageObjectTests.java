@@ -15,12 +15,8 @@ public class RegistrationWithPageObjectTests extends TestBase {
     @Test
     @DisplayName("Successful Fill All Form")
     void successfulFillAllFormTest() {
-
-        step("Открытие страницы регистрации", () ->
-            registrationPage.openPage());
-
-        step("Заполнение формы регистрации", () -> {
-            registrationPage.typeFirstName(firstName)
+            registrationPage.openPage()
+                .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .typeUserEmail(userEmail)
                 .typeUserNumber(userNumber)
@@ -32,9 +28,7 @@ public class RegistrationWithPageObjectTests extends TestBase {
                 .typeCurrentAddress(currentAddress)
                 .setStateAndCity(state, city)
                 .submitForm();
-        });
 
-        step("Проверка результатов заполнения формы регистрации", () -> {
             registrationResultsComponent.checkModalTitleWindowOpen(messageAfterSubmitting)
                 .checkFormResults("Student Name", userName)
                 .checkFormResults("Student Email", userEmail)
@@ -47,101 +41,69 @@ public class RegistrationWithPageObjectTests extends TestBase {
                 .checkFormResults("Address", currentAddress)
                 .checkFormResults("State and City", state + " " + city)
                 .checkModalTitleWindowClosed();
-        });
     }
 
     @Test
     @DisplayName("Negative Email Test")
     void negativeEmailTest() {
-
-        step("Открытие страницы регистрации", () ->
-            registrationPage.openPage());
-
-        step("Частичное заполнение полей формы", () -> {
-            registrationPage.typeFirstName(firstName)
+            registrationPage.openPage()
+                .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .typeUserEmail(invalidUserEmail)
-                .submitForm();
-        });
-
-        step("Проверка подсветки красным цветом поля почты", () ->
-            registrationPage.checkBorderColorUserEmail());
+                .submitForm()
+                .checkBorderColorUserEmail();
     }
 
     @Test
     @DisplayName("Fill Required Fields Form")
     void fillRequiredFieldsFormTest() {
-
-        step("Открытие страницы регистрации", () ->
-                registrationPage.openPage());
-
-        step("Заполнение обязательных полей формы", () -> {
-            registrationPage.typeFirstName(firstName)
+                registrationPage.openPage()
+                    .typeFirstName(firstName)
                     .typeLastName(lastName)
                     .setGender(genderWrapper)
                     .typeUserNumber(userNumber)
                     .submitForm();
-        });
 
-        step("Проверка результатов", () -> {
             registrationResultsComponent
                     .checkModalTitleWindowOpen(messageAfterSubmitting)
                     .checkFormResults("Student Name", userName)
                     .checkFormResults("Gender", genderWrapper)
                     .checkFormResults("Mobile", userNumber);
-        });
     }
 
     @Test
     @DisplayName("Empty Fields Form")
     void emptyFieldsFormTest() {
-
-        step("Открытие страницы регистрации", () -> {
                 registrationPage.openPage()
-                .submitForm();
-        });
+                    .submitForm();
 
-        step("Проверка результатов", () ->
-                $(".modal-content").shouldNotBe(visible));
+                $(".modal-content").shouldNotBe(visible);
     }
 
     @Test
     @DisplayName("Invalid User Number")
     void InvalidUserNumber() {
-
-        step("Открытие страницы регистрации", () ->
-                registrationPage.openPage());
-
-        step("Заполнение формы регистрации", () -> {
-            registrationPage.typeFirstName(firstName)
+                registrationPage.openPage()
+                    .typeFirstName(firstName)
                     .typeLastName(lastName)
                     .typeUserNumber(invalidUserNumber)
                     .setGender(genderWrapper)
                     .submitForm();
-        });
 
-        step("Проверка результатов", () ->
-                $(".modal-content").shouldNotBe(visible));
+                $(".modal-content").shouldNotBe(visible);
     }
 
     @Test
     @DisplayName("Invalid User Email")
     void InvalidUserEmail() {
-
-        step("Открытие страницы регистрации", () ->
-                registrationPage.openPage());
-
-        step("Заполнение формы регистрации", () -> {
-            registrationPage.typeFirstName(firstName)
+                registrationPage.openPage()
+                    .typeFirstName(firstName)
                     .typeLastName(lastName)
                     .typeUserEmail(invalidUserEmail)
                     .typeUserNumber(userNumber)
                     .setGender(genderWrapper)
                     .submitForm();
-        });
 
-        step("Проверка результатов", () ->
-                $(".modal-content").shouldNotBe(visible));
+                $(".modal-content").shouldNotBe(visible);
     }
-
 }
